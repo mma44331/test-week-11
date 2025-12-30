@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api
+  labels:
+    app: api
+    tier: database
+spec:
+  containers:
+  - name: api
+    image: mongo:7.0jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+    ports:
+    - containerPort: 8000
+    env:
+    - name: MONGO_HOST
+      value: "mongodb-service"
+    - name: MONGO_PORT
+      value: "27017"
+    - name: MONGO_DB
+      value: "contactsdb"
