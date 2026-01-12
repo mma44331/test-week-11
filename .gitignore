@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+pymongo_cheatsheet.md
+week11_k8s_mongo_contacts_api.md
+app/compose.yaml

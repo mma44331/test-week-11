@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-stateful
+  namespace: statefulset-lab
+spec:
+  serviceName: "nginx-headless"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-stateful
+  template:
+    metadata:
+      labels:
+        app: nginx-stateful
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          echo "Pod: $HOSTNAME" > /usr/share/nginx/html/index.html
+          echo "Date: $(date)" >> /usr/share/nginx/html/index.html
+          nginx -g 'daemon off;'
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 100Mi

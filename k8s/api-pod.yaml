@@ -8,13 +8,15 @@ metadata:
 spec:
   containers:
   - name: api
-    image: mongo:7.0jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+    image: mma44331/apploction:latest
     ports:
     - containerPort: 8000
     env:
-    - name: MONGO_HOST
+    - name: DB_HOST
       value: "mongodb-service"
-    - name: MONGO_PORT
+    - name: DB_PORT
       value: "27017"
-    - name: MONGO_DB
+    - name: DB_NAME
       value: "contactsdb"
+    - name: DB_COLACTION
+      value: "contact"
